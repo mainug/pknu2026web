@@ -1,22 +1,96 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>html 실습</title>
+    <title>html 실습 - 1일차 예제 토글</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        margin: 20px;
+      }
+
+      h1 {
+        background-color: cadetblue;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button.day-btn {
+        background: none;
+        border: none;
+        color: #2f6472;
+        font-size: 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 8px 0;
+        text-align: left;
+      }
+
+      button.day-btn:hover {
+        color: #1a73e8;
+      }
+
+      #examples-1day {
+        margin-top: 10px;
+        padding-left: 10px;
+        display: none; /* 처음에는 숨김 */
+      }
+
+      #examples-1day a {
+        display: inline-block;
+        margin: 6px 0;
+        text-decoration: none;
+        color: #1a73e8;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 4px;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      #examples-1day a:hover {
+        background-color: #1a73e8;
+        color: white;
+      }
+    </style>
   </head>
   <body>
-    <h1 style="background-color: cadetblue; color: white; padding: 10px">
-      html 실습
-    </h1>
-    <h2>1일차</h2>
-    <!-- (a[href="ex01-0$.html"]{예제 $}br)*7 -->
-    <a href="ex01-01.html">예제 1</a><br />
-    <a href="ex01-02.html">예제 2</a><br />
-    <a href="ex01-03.html">예제 3</a><br />
-    <a href="ex01-04.html">예제 4</a><br />
-    <a href="ex01-05.html">예제 5</a><br />
-    <a href="ex01-06.html">예제 6</a><br />
-    <a href="ex01-07.html">예제 7</a>
+    <h1>html 실습</h1>
+    <button
+      class="day-btn"
+      aria-expanded="false"
+      aria-controls="examples-1day"
+      id="day1-btn"
+    >
+      1일차 ▼
+    </button>
+
+    <div id="examples-1day" aria-labelledby="day1-btn">
+      <a href="ex01-01.html">예제 1</a><br />
+      <a href="ex01-02.html">예제 2</a><br />
+      <a href="ex01-03.html">예제 3</a><br />
+      <a href="ex01-04.html">예제 4</a><br />
+      <a href="ex01-05.html">예제 5</a><br />
+      <a href="ex01-06.html">예제 6</a><br />
+      <a href="ex01-07.html">예제 7</a>
+    </div>
+
+    <script>
+      const btn = document.getElementById("day1-btn");
+      const examples = document.getElementById("examples-1day");
+
+      btn.addEventListener("click", () => {
+        const isVisible = examples.style.display === "block";
+        examples.style.display = isVisible ? "none" : "block";
+        btn.setAttribute("aria-expanded", !isVisible);
+        btn.textContent = isVisible ? "1일차 ▼" : "1일차 ▲";
+      });
+    </script>
   </body>
 </html>
