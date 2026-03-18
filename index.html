@@ -6,143 +6,275 @@
     <title>html 실습</title>
     <style>
       body {
+        background-color: #f9f6f2;
+        color: #4a4a4a;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f0f4f8;
-        color: #333;
         margin: 20px;
       }
 
       h1 {
-        background-color: cadetblue;
-        color: white;
+        background-color: #a3c4f3;
+        color: #2c3e50;
         padding: 15px 20px;
         border-radius: 6px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(163, 196, 243, 0.5);
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px 24px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        line-height: 1.6;
+        color: #4a4a4a;
+        transition: box-shadow 0.3s ease;
+      }
+      .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
 
       button.day-btn {
         background: none;
         border: none;
-        color: #2f6472;
+        color: #ad6ea0;
         font-size: 1.5rem;
         font-weight: 700;
         cursor: pointer;
         padding: 8px 0;
         text-align: left;
         width: 100%;
+        transition: color 0.3s ease;
       }
 
-      button.day-btn:hover {
-        color: #1a73e8;
-      }
-
-      .examples {
-        margin-top: 10px;
-        padding-left: 10px;
-        display: none;
+      button.day-btn:hover,
+      button.day-btn:focus {
+        color: #f3a6c4;
+        outline: none;
       }
 
       .examples a {
-        display: inline-block;
-        margin: 6px 0;
-        text-decoration: none;
-        color: #1a73e8;
+        color: #6c63ff;
         font-weight: 600;
         padding: 6px 12px;
         border-radius: 4px;
+        text-decoration: none;
         transition:
           background-color 0.3s ease,
           color 0.3s ease;
       }
+      .examples a:hover,
+      .examples a:focus {
+        background-color: #6c63ff;
+        color: #f9f6f2;
+        outline: none;
+      }
+      .examples a:focus {
+        outline: 3px solid #f3a6c4;
+        outline-offset: 2px;
+      }
 
-      .examples a:hover {
-        background-color: #1a73e8;
-        color: white;
+      .examples {
+        height: 0;
+        overflow: visible;
+        opacity: 0;
+        margin-top: 0;
+        transition:
+          height 0.4s ease,
+          opacity 0.4s ease,
+          margin-top 0.4s ease;
+      }
+      .examples.open {
+        opacity: 1;
+        margin-top: 10px;
+      }
+
+      #day-buttons-wrapper {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        align-items: start;
+        grid-auto-rows: min-content;
+      }
+
+      .day-section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 1000px) {
+        #day-buttons-wrapper {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        #day-buttons-wrapper {
+          grid-template-columns: repeat(1, 1fr);
+        }
       }
     </style>
   </head>
   <body>
     <h1>html 실습</h1>
 
-    <!-- 1일차 -->
-    <button
-      class="day-btn"
-      aria-expanded="false"
-      aria-controls="examples-1day"
-      id="day1-btn"
-    >
-      1일차 ▼
-    </button>
-    <div id="examples-1day" class="examples" aria-labelledby="day1-btn">
-      <a href="ex01-01.html">예제 1</a><br />
-      <a href="ex01-02.html">예제 2</a><br />
-      <a href="ex01-03.html">예제 3</a><br />
-      <a href="ex01-04.html">예제 4</a><br />
-      <a href="ex01-05.html">예제 5</a><br />
-      <a href="ex01-06.html">예제 6</a><br />
-      <a href="ex01-07.html">예제 7</a>
-    </div>
+    <div id="day-buttons-wrapper">
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-1day"
+          id="day1-btn"
+        >
+          1일차 ▼
+        </button>
+        <div id="examples-1day" class="examples" aria-labelledby="day1-btn">
+          <a href="ex01-01.html">예제 1</a><br />
+          <a href="ex01-02.html">예제 2</a><br />
+          <a href="ex01-03.html">예제 3</a><br />
+          <a href="ex01-04.html">예제 4</a><br />
+          <a href="ex01-05.html">예제 5</a><br />
+          <a href="ex01-06.html">예제 6</a><br />
+          <a href="ex01-07.html">예제 7</a>
+        </div>
+      </div>
 
-    <!-- 2일차 -->
-    <button
-      class="day-btn"
-      aria-expanded="false"
-      aria-controls="examples-2day"
-      id="day2-btn"
-    >
-      2일차 ▼
-    </button>
-    <div id="examples-2day" class="examples" aria-labelledby="day2-btn">
-      <a href="ex02-01.html">예제 1</a><br />
-      <a href="ex02-02.html">예제 2</a><br />
-      <a href="ex02-03.html">예제 3</a><br />
-      <a href="ex02-04.html">예제 4</a><br />
-      <a href="ex02-05.html">예제 5</a><br />
-      <a href="ex02-06.html">예제 6</a><br />
-      <a href="ex02-07.html">예제 7</a><br />
-      <a href="ex02-08.html">예제 8</a><br />
-      <a href="ex02-09.html">예제 9</a><br />
-      <a href="ex02-10.html">예제 10</a><br />
-      <a href="ex02-11.html">예제 11</a><br />
-    </div>
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-2day"
+          id="day2-btn"
+        >
+          2일차 ▼
+        </button>
+        <div id="examples-2day" class="examples" aria-labelledby="day2-btn">
+          <a href="ex02-01.html">예제 1</a><br />
+          <a href="ex02-02.html">예제 2</a><br />
+          <a href="ex02-03.html">예제 3</a><br />
+          <a href="ex02-04.html">예제 4</a><br />
+          <a href="ex02-05.html">예제 5</a><br />
+          <a href="ex02-06.html">예제 6</a><br />
+          <a href="ex02-07.html">예제 7</a><br />
+          <a href="ex02-08.html">예제 8</a><br />
+          <a href="ex02-09.html">예제 9</a><br />
+          <a href="ex02-10.html">예제 10</a><br />
+          <a href="ex02-11.html">예제 11</a>
+        </div>
+      </div>
 
-    <!-- 3일차 -->
-    <button
-      class="day-btn"
-      aria-expanded="false"
-      aria-controls="examples-3day"
-      id="day3-btn"
-    >
-      3일차 ▼
-    </button>
-    <div id="examples-3day" class="examples" aria-labelledby="day3-btn">
-      <a href="ex03-01.html">예제 1</a><br />
-      <a href="ex03-02.html">예제 2</a><br />
-      <a href="ex03-03.html">예제 3</a><br />
-      <a href="ex03-04.html">예제 4</a><br />
-      <a href="ex03-05.html">예제 5</a><br />
-      <a href="ex03-06.html">예제 6</a><br />
-      <a href="ex03-07.html">예제 7</a><br />
-      <a href="ex03-08.html">예제 8</a><br />
-      <a href="ex03-09.html">예제 9</a><br />
-      <a href="ex03-10.html">예제 10</a><br />
-      <a href="ex03-11.html">예제 11</a><br />
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-3day"
+          id="day3-btn"
+        >
+          3일차 ▼
+        </button>
+        <div id="examples-3day" class="examples" aria-labelledby="day3-btn">
+          <a href="ex03-01.html">예제 1</a><br />
+          <a href="ex03-02.html">예제 2</a><br />
+          <a href="ex03-03.html">예제 3</a><br />
+          <a href="ex03-04.html">예제 4</a><br />
+          <a href="ex03-05.html">예제 5</a><br />
+          <a href="ex03-06.html">예제 6</a><br />
+          <a href="ex03-07.html">예제 7</a><br />
+          <a href="ex03-08.html">예제 8</a><br />
+          <a href="ex03-09.html">예제 9</a><br />
+          <a href="ex03-10.html">예제 10</a><br />
+          <a href="ex03-11.html">예제 11</a>
+        </div>
+      </div>
+
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-4day"
+          id="day4-btn"
+        >
+          4일차 ▼
+        </button>
+        <div id="examples-4day" class="examples" aria-labelledby="day4-btn">
+          <a href="ex04-01.html">예제 1</a><br />
+          <a href="ex04-02.html">예제 2</a><br />
+          <a href="ex04-03.html">예제 3</a><br />
+          <a href="ex04-04.html">예제 4</a><br />
+          <a href="ex04-05.html">예제 5</a><br />
+          <a href="ex04-06.html">예제 6</a><br />
+          <a href="ex04-07.html">예제 7</a><br />
+          <a href="ex04-08.html">예제 8</a><br />
+          <a href="ex04-09.html">예제 9</a><br />
+          <a href="ex04-10.html">예제 10</a><br />
+          <a href="ex04-11.html">예제 11</a><br />
+          <a href="ex04-12.html">예제 12</a><br />
+          <a href="ex04-13.html">예제 13</a><br />
+          <a href="ex04-14.html">예제 14</a><br />
+          <a href="ex04-15.html">예제 15</a><br />
+          <a href="ex04-16.html">예제 16</a><br />
+          <a href="ex04-17.html">예제 17</a>
+        </div>
+      </div>
+
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-5day"
+          id="day5-btn"
+        >
+          5일차 ▼
+        </button>
+        <div id="examples-5day" class="examples" aria-labelledby="day5-btn">
+          <a href="ex02-01.html">예제 1</a><br />
+          <a href="ex02-02.html">예제 2</a><br />
+          <a href="ex02-03.html">예제 3</a><br />
+          <a href="ex02-04.html">예제 4</a><br />
+          <a href="ex02-05.html">예제 5</a><br />
+          <a href="ex02-06.html">예제 6</a><br />
+          <a href="ex02-07.html">예제 7</a><br />
+          <a href="ex02-08.html">예제 8</a><br />
+          <a href="ex02-09.html">예제 9</a><br />
+          <a href="ex02-10.html">예제 10</a><br />
+          <a href="ex02-11.html">예제 11</a>
+        </div>
+      </div>
     </div>
 
     <script>
       const buttons = document.querySelectorAll("button.day-btn");
+
       buttons.forEach((btn) => {
+        btn.setAttribute("tabindex", "0");
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+
         btn.addEventListener("click", () => {
           const contentId = btn.getAttribute("aria-controls");
           const content = document.getElementById(contentId);
-          const isVisible = content.style.display === "block";
+          const isOpen = content.classList.contains("open");
 
-          // 토글
-          content.style.display = isVisible ? "none" : "block";
-          btn.setAttribute("aria-expanded", !isVisible);
-          btn.textContent = isVisible
-            ? btn.textContent.replace("▲", "▼")
-            : btn.textContent.replace("▼", "▲");
+          if (isOpen) {
+            content.style.height = "0";
+            content.style.opacity = "0";
+            content.style.marginTop = "0";
+            content.classList.remove("open");
+            btn.setAttribute("aria-expanded", false);
+            btn.textContent = btn.textContent.replace("▲", "▼");
+          } else {
+            const scrollHeight = content.scrollHeight;
+            content.style.height = scrollHeight + "px";
+            content.style.opacity = "1";
+            content.style.marginTop = "10px";
+            content.classList.add("open");
+            btn.setAttribute("aria-expanded", true);
+            btn.textContent = btn.textContent.replace("▼", "▲");
+          }
         });
       });
     </script>
