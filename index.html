@@ -53,6 +53,18 @@
         outline: none;
       }
 
+      /* 링크 개별 애니메이션 */
+      @keyframes linkFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       .examples a {
         color: #6c63ff;
         font-weight: 600;
@@ -62,6 +74,9 @@
         transition:
           background-color 0.3s ease,
           color 0.3s ease;
+        /* 기본 상태: 숨김 */
+        opacity: 0;
+        display: inline-block;
       }
       .examples a:hover,
       .examples a:focus {
@@ -74,9 +89,14 @@
         outline-offset: 2px;
       }
 
+      /* open 상태일 때 링크 애니메이션 실행 */
+      .examples.open a {
+        animation: linkFadeIn 0.3s ease forwards;
+      }
+
       .examples {
         height: 0;
-        overflow: visible;
+        overflow: hidden;
         opacity: 0;
         margin-top: 0;
         transition:
@@ -91,6 +111,7 @@
         margin-top: 10px;
         pointer-events: auto;
         visibility: visible;
+        overflow: visible;
       }
 
       #day-buttons-wrapper {
@@ -263,6 +284,20 @@
           <a href="ex06-17.html">예제 17</a><br />
         </div>
       </div>
+
+      <div class="day-section card">
+        <button
+          class="day-btn"
+          aria-expanded="false"
+          aria-controls="examples-7day"
+          id="day7-btn"
+        >
+          7일차 ▼
+        </button>
+        <div id="examples-7day" class="examples" aria-labelledby="day7-btn">
+          <strong style="text-align: center">정보처리기사 실기 공부</strong>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -283,7 +318,7 @@
           const content = document.getElementById(contentId);
           const isOpen = content.classList.contains("open");
 
-          // 다른 열린 콘텐츠 모두 닫기 (한 번에 하나만 열림)
+          // 다른 열린 콘텐츠 모두 닫기
           buttons.forEach((otherBtn) => {
             const otherContentId = otherBtn.getAttribute("aria-controls");
             const otherContent = document.getElementById(otherContentId);
@@ -302,9 +337,18 @@
       });
 
       function openContent(content, btn) {
-        const scrollHeight = content.scrollHeight;
+        const links = content.querySelectorAll("a");
 
-        content.style.height = scrollHeight + "px";
+        // 링크 애니메이션 초기화 (재오픈 시에도 동작하도록)
+        links.forEach((link) => {
+          link.style.animation = "none";
+          link.style.opacity = "0";
+        });
+
+        // 강제 리플로우로 animation reset 적용
+        content.offsetHeight;
+
+        content.style.height = content.scrollHeight + "px";
         content.style.opacity = "1";
         content.style.marginTop = "10px";
         content.style.pointerEvents = "auto";
@@ -313,9 +357,26 @@
         btn.textContent = btn.textContent.replace("▼", "▲");
 
         toggleLinks(content, true);
+
+        const BASE_DELAY = 100;
+        const STAGGER = 30;
+
+        links.forEach((link, i) => {
+          link.style.animation = "";
+          link.style.animationDelay = `${BASE_DELAY + i * STAGGER}ms`;
+        });
       }
 
       function closeContent(content, btn) {
+        const links = content.querySelectorAll("a");
+
+        // 닫힐 때 링크 즉시 숨김
+        links.forEach((link) => {
+          link.style.animation = "none";
+          link.style.opacity = "0";
+          link.style.animationDelay = "";
+        });
+
         content.style.height = "0";
         content.style.opacity = "0";
         content.style.marginTop = "0";
@@ -327,7 +388,6 @@
         toggleLinks(content, false);
       }
 
-      // 예제 내부 링크 활성/비활성 제어
       function toggleLinks(content, enable) {
         const links = content.querySelectorAll("a");
 
@@ -344,7 +404,7 @@
         });
       }
 
-      // 허공 클릭 시 열려있는 모든 콘텐츠 닫기 ('.examples'로 변경)
+      // 허공 클릭 시 열려있는 모든 콘텐츠 닫기
       document.addEventListener("click", (e) => {
         if (
           !e.target.matches("button.day-btn") &&
